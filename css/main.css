@@ -5,7 +5,8 @@
   --clr-light: #fff;
   --fw-bold: 700;
   --fw-black: 900;
-  --grid: 1fr;
+  --grid: minmax(1em, 10%) minmax(10rem, 22ch) minmax(10rem, 23ch)
+    minmax(1em, 3fr) min-content;
 }
 
 *,
@@ -29,6 +30,10 @@ h3 {
   line-height: 1;
 }
 
+p {
+  margin-top: 0;
+}
+
 .btn {
   cursor: pointer;
   display: inline-block;
@@ -39,6 +44,10 @@ h3 {
   text-decoration: none;
   font-weight: var(--fw-bold);
   margin-bottom: 0.75em;
+}
+
+.btn + .btn {
+  margin-left: auto;
 }
 
 .btn__primary {
@@ -79,15 +88,49 @@ header {
   padding: 1em;
 
   list-style: none;
-  font-size: 14px;
+  font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: var(--fw-bold);
 }
 
+.nav__list-item {
+  margin-left: 3em;
+}
+
 .nav__link {
   text-decoration: none;
   color: inherit;
+}
+
+@media (min-width: 1000px) {
+  header {
+    display: grid;
+    grid-template-columns: var(--grid);
+    align-items: center;
+  }
+
+  .logo,
+  .nav,
+  .weather {
+    grid-row: 1;
+    margin: 0;
+  }
+
+  .logo {
+    grid-column: 2;
+  }
+
+  .nav {
+    grid-column: 2/5;
+    justify-self: end;
+    margin-right: 3em;
+  }
+
+  .weather {
+    grid-column: -2/-1;
+    justify-self: end;
+  }
 }
 
 .weather {
@@ -147,6 +190,31 @@ header {
 .main {
   padding: 3em 1em 5rem;
 }
+
+@media (min-width: 500px) {
+  .main {
+    display: grid;
+    grid-template-columns: var(--grid);
+    justify-items: start;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .main > * {
+    grid-column: 2/4;
+  }
+
+  .main-ski {
+    background-position: left bottom;
+  }
+}
+
+@media (min-width: 1200px) {
+  .main-ski {
+    background-position: center right;
+  }
+}
+
 .main-ski {
   background-image: url(/images/sebastian-staines-xZIFEPtRsRI-unsplash\ 1.png);
   background-size: cover;
@@ -155,5 +223,10 @@ header {
 .main__title {
   line-height: 1;
   font-weight: var(--fw-black);
-  font-size: 3rem;
+  font-size: 3em;
+  margin-bottom: 0.75em;
+}
+
+.main__intro {
+  margin-bottom: 2em;
 }
